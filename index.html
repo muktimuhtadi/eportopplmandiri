@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Portofolio PPL PPG - Mukti Muhtadi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Tailwind Config for Custom Colors and Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#005B9E',
+                        primaryHover: '#00477D',
+                        primaryLight: '#E6F0F8',
+                        cursorDark: '#0F172A',
+                        cursorGray: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styling for Glassmorphism and Smooth Cursor-like Hover Effects */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 80% 20%, rgba(0, 91, 158, 0.08) 0%, rgba(255, 255, 255, 0) 60%),
+                        radial-gradient(circle at 20% 80%, rgba(0, 91, 158, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #005B9E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00477D;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-slate-800 antialiased selection:bg-primary selection:text-white">
+
+    <!-- ================= NAVBAR (Cursor.com Style) ================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-lg shadow-md shadow-primary/20">
+                        eP
+                    </div>
+                    <span class="font-bold text-lg tracking-tight text-slate-900">e-Portofolio <span class="text-primary font-semibold">PPG</span></span>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1">
+                    <!-- Beranda -->
+                    <button onclick="switchTab('beranda')" id="nav-beranda" class="nav-btn text-slate-700 hover:text-primary hover:bg-primaryLight/50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Beranda
+                    </button>
+
+                    <!-- Praktik Terbimbing Dropdown -->
+                    <div class="relative group">
+                        <button onclick="switchTab('praktik-terbimbing')" id="nav-praktik-terbimbing" class="nav-btn flex items-center gap-1 text-slate-700 hover:text-primary hover:bg-primaryLight/50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            Praktik Terbimbing
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180 opacity-60"></i>
+                        </button>
+                        <!-- Mega Submenu -->
+                        <div class="absolute left-0 mt-1 w-64 rounded-xl bg-white shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2 z-50">
+                            <a href="#pt-modul" onclick="switchTab('praktik-terbimbing')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-book-open text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Modul Ajar</div><div class="text-[10px] text-slate-500">Rencana Pembelajaran</div></div>
+                            </a>
+                            <a href="#pt-bahan" onclick="switchTab('praktik-terbimbing')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-file-lines text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Bahan Ajar</div><div class="text-[10px] text-slate-500">Materi Instruksional</div></div>
+                            </a>
+                            <a href="#pt-media" onclick="switchTab('praktik-terbimbing')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-laptop-code text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Media Pembelajaran</div><div class="text-[10px] text-slate-500">Alat Bantu Visual & Digital</div></div>
+                            </a>
+                            <a href="#pt-video" onclick="switchTab('praktik-terbimbing')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-video text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Video Pembelajaran</div><div class="text-[10px] text-slate-500">Rekaman Pelaksanaan Kelas</div></div>
+                            </a>
+                            <a href="#pt-penilaian" onclick="switchTab('praktik-terbimbing')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-clipboard-check text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Instrumen Penilaian</div><div class="text-[10px] text-slate-500">Evaluasi Guru Pamong</div></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- UTS Dropdown -->
+                    <div class="relative group">
+                        <button onclick="switchTab('uts')" id="nav-uts" class="nav-btn flex items-center gap-1 text-slate-700 hover:text-primary hover:bg-primaryLight/50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            UTS
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180 opacity-60"></i>
+                        </button>
+                        <!-- Mega Submenu -->
+                        <div class="absolute left-0 mt-1 w-64 rounded-xl bg-white shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2 z-50">
+                            <a href="#uts-modul" onclick="switchTab('uts')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-book-open text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Modul Ajar (UTS)</div><div class="text-[10px] text-slate-500">Perancangan Perangkat UTS</div></div>
+                            </a>
+                            <a href="#uts-bahan" onclick="switchTab('uts')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-file-lines text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Bahan Ajar</div><div class="text-[10px] text-slate-500">Materi Evaluasi UTS</div></div>
+                            </a>
+                            <a href="#uts-media" onclick="switchTab('uts')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-laptop-code text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Media Pembelajaran</div><div class="text-[10px] text-slate-500">Media Interaktif UTS</div></div>
+                            </a>
+                            <a href="#uts-video" onclick="switchTab('uts')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-video text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Video Pembelajaran</div><div class="text-[10px] text-slate-500">Dokumentasi Praktik UTS</div></div>
+                            </a>
+                            <a href="#uts-penilaian" onclick="switchTab('uts')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-clipboard-check text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Instrumen Penilaian</div><div class="text-[10px] text-slate-500">Hasil Penilaian UTS</div></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- UAS Dropdown -->
+                    <div class="relative group">
+                        <button onclick="switchTab('uas')" id="nav-uas" class="nav-btn flex items-center gap-1 text-slate-700 hover:text-primary hover:bg-primaryLight/50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            UAS
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180 opacity-60"></i>
+                        </button>
+                        <!-- Mega Submenu -->
+                        <div class="absolute left-0 mt-1 w-64 rounded-xl bg-white shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 p-2 z-50">
+                            <a href="#uas-modul" onclick="switchTab('uas')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-book-open text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Modul Ajar (UAS)</div><div class="text-[10px] text-slate-500">Perancangan Perangkat UAS</div></div>
+                            </a>
+                            <a href="#uas-bahan" onclick="switchTab('uas')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-file-lines text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Bahan Ajar</div><div class="text-[10px] text-slate-500">Materi Evaluasi UAS</div></div>
+                            </a>
+                            <a href="#uas-media" onclick="switchTab('uas')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-laptop-code text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Media Pembelajaran</div><div class="text-[10px] text-slate-500">Media Final UAS</div></div>
+                            </a>
+                            <a href="#uas-video" onclick="switchTab('uas')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-video text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Video Pembelajaran</div><div class="text-[10px] text-slate-500">Dokumentasi Praktik UAS</div></div>
+                            </a>
+                            <a href="#uas-penilaian" onclick="switchTab('uas')" class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-primaryLight transition-colors">
+                                <div class="w-8 h-8 rounded-md bg-primary/10 text-primary flex items-center justify-center"><i class="fa-solid fa-clipboard-check text-xs"></i></div>
+                                <div><div class="text-xs font-semibold text-slate-900">Instrumen Penilaian</div><div class="text-[10px] text-slate-500">Hasil Akhir Penilaian</div></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Non-Mengajar -->
+                    <button onclick="switchTab('non-mengajar')" id="nav-non-mengajar" class="nav-btn text-slate-700 hover:text-primary hover:bg-primaryLight/50 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Non-Mengajar
+                    </button>
+                </nav>
+
+                <!-- CTA Contact Quick Link -->
+                <div class="hidden md:flex items-center">
+                    <a href="#hubungi-saya" onclick="switchTab('beranda')" class="bg-primary hover:bg-primaryHover text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md shadow-primary/20 transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-paper-plane mr-1.5"></i> Kontak
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-md text-slate-700 hover:text-primary hover:bg-slate-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white/95 backdrop-blur-lg px-4 pt-2 pb-4 space-y-1">
+            <button onclick="switchTab('beranda'); toggleMobileMenu();" class="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:bg-primaryLight rounded-md">Beranda</button>
+            <button onclick="switchTab('praktik-terbimbing'); toggleMobileMenu();" class="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:bg-primaryLight rounded-md">Praktik Terbimbing</button>
+            <button onclick="switchTab('uts'); toggleMobileMenu();" class="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:bg-primaryLight rounded-md">UTS</button>
+            <button onclick="switchTab('uas'); toggleMobileMenu();" class="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:bg-primaryLight rounded-md">UAS</button>
+            <button onclick="switchTab('non-mengajar'); toggleMobileMenu();" class="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 hover:bg-primaryLight rounded-md">Non-Mengajar</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER WITH TABS -->
+    <main class="pt-20">
+
+        <!-- ================================================================= -->
+        <!-- TAB 1: BERANDA -->
+        <!-- ================================================================= -->
+        <div id="tab-beranda" class="tab-content">
+            
+            <!-- SECTION 1: HERO PORTFOLIO -->
+            <section class="hero-gradient py-20 lg:py-28 px-4 sm:px-6 lg:px-8 border-b border-slate-100">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+                        <!-- Left Hero Content -->
+                        <div class="flex-1 text-center lg:text-left space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide border border-primary/20">
+                                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                e-Portofolio Resmi PPL PPG
+                            </div>
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                                Selamat Datang di <br class="hidden sm:inline" />
+                                <span class="text-primary">e-Portofolio</span> Praktik Pengalaman Lapangan
+                            </h1>
+                            <div class="space-y-1 text-slate-600 text-base sm:text-lg font-normal">
+                                <p class="font-medium text-slate-800">Pendidikan Profesi Guru (PPG) Gelombang 1 2026</p>
+                                <p class="text-primary font-semibold">Universitas Muhammadiyah Purwokerto</p>
+                                <p class="text-slate-500">Unit Latihan: SMKN 1 Kalibagor</p>
+                            </div>
+                            <!-- Bio Badge -->
+                            <div class="pt-4 inline-flex flex-col sm:flex-row items-center gap-4 bg-white p-4 rounded-2xl shadow-lg border border-slate-100/80">
+                                <div class="text-left">
+                                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Mahasiswa PPG</div>
+                                    <div class="text-lg font-bold text-slate-900">Mukti Muhtadi</div>
+                                    <div class="text-xs font-mono text-primary bg-primaryLight px-2 py-0.5 rounded inline-block mt-1">NIM: 2501640500</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Animated Profile Photo (Floating Circle) -->
+                        <div class="relative flex justify-center items-center">
+                            <!-- Outer decorative aura ring -->
+                            <div class="absolute w-72 h-72 sm:w-80 sm:h-80 rounded-full border-2 border-primary/30 animate-ping opacity-25"></div>
+                            <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-primary/5 blur-2xl"></div>
+                            
+                            <!-- Floating Main Profile Frame -->
+                            <div class="relative animate-float">
+                                <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-full p-2 bg-gradient-to-tr from-primary via-blue-400 to-indigo-200 shadow-2xl">
+                                    <img src="mukti.png" 
+                                         alt="Mukti Muhtadi" 
+                                         class="w-full h-full object-cover rounded-full border-4 border-white shadow-inner"
+                                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/005B9E/ffffff?text=Mukti+Muhtadi';">
+                                </div>
+                                <!-- Badge tag -->
+                                <div class="absolute bottom-2 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg border border-slate-200 text-xs font-bold text-primary flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check text-emerald-500"></i> Terverifikasi
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: PROGRAM PPG KEMENDIKDASMEN & PPG UMP -->
+            <section class="py-16 bg-slate-50 border-b border-slate-100 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto space-y-12">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Program Pendidikan Profesi Guru (PPG)</h2>
+                        <p class="text-slate-600 mt-2">Sinergi Kemendikdasmen dan Universitas Muhammadiyah Purwokerto dalam Menyiapkan Pendidik Profesional Masa Depan.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                        <!-- Card Deskripsi & Gedung -->
+                        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <div class="inline-block p-3 rounded-xl bg-primaryLight text-primary font-bold text-sm">
+                                    <i class="fa-solid fa-building-columns mr-2"></i> Mengenai PPG UMP
+                                </div>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Program Pendidikan Profesi Guru (PPG) merupakan program pendidikan tinggi setelah program sarjana yang mempersiapkan peserta didik dengan persyaratan keahlian khusus dalam menjadi guru profesional.
+                                </p>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Di bawah naungan <strong>Kementerian Pendidikan Dasar dan Menengah (Kemendikdasmen)</strong> dan diselenggarakan secara holistik oleh <strong>Universitas Muhammadiyah Purwokerto (UMP)</strong>, program ini berkomitmen tinggi melahirkan pendidik berkualitas unggul, berintegritas, serta berdaya saing global.
+                                </p>
+                            </div>
+
+                            <!-- Foto Gedung PPG UMP -->
+                            <div class="space-y-2">
+                                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Gedung PPG UMP</div>
+                                <div class="overflow-hidden rounded-xl border border-slate-200 group">
+                                    <img src="ppgump.png" 
+                                         alt="Gedung PPG UMP" 
+                                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                                         onerror="this.onerror=null; this.src='https://placehold.co/800x450/005B9E/ffffff?text=Gedung+PPG+UMP';">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Maps & Kontak PPG UMP -->
+                        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-6">
+                            <div>
+                                <div class="inline-block p-3 rounded-xl bg-primaryLight text-primary font-bold text-sm mb-4">
+                                    <i class="fa-solid fa-map-location-dot mr-2"></i> Lokasi & Kontak PPG UMP
+                                </div>
+                                <!-- Embed Google Maps UMP -->
+                                <div class="w-full h-56 rounded-xl overflow-hidden border border-slate-200 shadow-inner">
+                                    <iframe 
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.2711689255655!2d109.2513904!3d-7.4352147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655ea08f1f727d%3A0xe67db5cfb11f7ff0!2sUniversitas%20Muhammadiyah%20Purwokerto!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                                        width="100%" 
+                                        height="100%" 
+                                        style="border:0;" 
+                                        allowfullscreen="" 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <!-- Detail Kontak PPG UMP -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-2">
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center space-x-3">
+                                    <i class="fa-solid fa-globe text-primary text-base"></i>
+                                    <div>
+                                        <div class="text-slate-400 text-[10px]">Website Resmi</div>
+                                        <a href="https://ppg.ump.ac.id" target="_blank" class="font-semibold text-slate-800 hover:text-primary">ppg.ump.ac.id</a>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center space-x-3">
+                                    <i class="fa-solid fa-envelope text-primary text-base"></i>
+                                    <div>
+                                        <div class="text-slate-400 text-[10px]">Email</div>
+                                        <span class="font-semibold text-slate-800">ppg@ump.ac.id</span>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center space-x-3">
+                                    <i class="fa-brands fa-instagram text-primary text-base"></i>
+                                    <div>
+                                        <div class="text-slate-400 text-[10px]">Instagram</div>
+                                        <a href="https://instagram.com/ppgump" target="_blank" class="font-semibold text-slate-800 hover:text-primary">@ppgump</a>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center space-x-3">
+                                    <i class="fa-solid fa-phone text-primary text-base"></i>
+                                    <div>
+                                        <div class="text-slate-400 text-[10px]">Telepon / Sekretariat</div>
+                                        <span class="font-semibold text-slate-800">(0281) 636751</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: PROFIL SMKN 1 KALIBAGOR -->
+            <section class="py-16 bg-white border-b border-slate-100 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto space-y-12">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Profil Sekolah Praktik: SMKN 1 Kalibagor</h2>
+                        <p class="text-slate-600 mt-2">Mitra Pelaksanaan Praktik Pengalaman Lapangan (PPL) PPG UMP.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <!-- Foto & Info SMKN 1 Kalibagor -->
+                        <div class="space-y-6">
+                            <div class="overflow-hidden rounded-2xl border border-slate-200 shadow-md group">
+                                <img src="smekka.png" 
+                                     alt="SMKN 1 Kalibagor" 
+                                     class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/800x450/005B9E/ffffff?text=SMKN+1+Kalibagor';">
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-3">
+                                <h3 class="text-lg font-bold text-slate-900">Tentang SMKN 1 Kalibagor</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    SMK Negeri 1 Kalibagor (dikenal sebagai Sekolah Pertanian / Gartenry) merupakan salah satu sekolah kejuruan unggulan di Kabupaten Banyumas yang mengedepankan pendidikan karakter, keterampilan vokasional, serta berwawasan lingkungan. Memiliki fasilitas lengkap, termasuk program semi-boarding untuk mendukung pembelajaran komprehensif.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Maps & Contacts -->
+                        <div class="space-y-6">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <div class="text-xs font-semibold text-slate-500 mb-3 flex items-center gap-2">
+                                    <i class="fa-solid fa-map-pin text-primary"></i> Peta Lokasi SMKN 1 Kalibagor
+                                </div>
+                                <div class="w-full h-60 rounded-xl overflow-hidden border border-slate-200">
+                                    <iframe 
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.123!2d109.290!3d-7.460!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655c6575084925%3A0x6b0a1a5b88123456!2sSMK%20Negeri%201%20Kalibagor!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                                        width="100%" 
+                                        height="100%" 
+                                        style="border:0;" 
+                                        allowfullscreen="" 
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                            </div>
+
+                            <!-- Kontak Medsos SMKN 1 Kalibagor -->
+                            <div class="grid grid-cols-2 gap-3 text-xs">
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 flex items-center space-x-3">
+                                    <i class="fa-solid fa-globe text-primary text-base"></i>
+                                    <div>
+                                        <div class="text-slate-400 text-[10px]">Website</div>
+                                        <a href="https://smkn1kalibagor.sch.id" target="_blank" class="font-semibold text-slate-800 hover:text-primary">smkn1kalibagor.sch.id</a>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-white rounded-xl border border-slate-200 flex items-center space-x-3">
+                                    <i class="fa-brands fa-instagram text-primary text-base"></i>
+                                    <div>
+                                        <div class="text-slate-400 text-[10px]">Instagram</div>
+                                        <span class="font-semibold text-slate-800">@smkn1kalibagor</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: KAMPUNG HALAMAN - KABUPATEN KARANGANYAR -->
+            <section class="py-16 bg-slate-50 border-b border-slate-100 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto space-y-10">
+                    <div class="text-center max-w-3xl mx-auto">
+                        <span class="text-xs font-semibold text-primary uppercase tracking-wider">Asal & Kampung Halaman</span>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Kabupaten Karanganyar</h2>
+                        <p class="text-slate-600 mt-2">Bumi Intanpari di kaki Gunung Lawu, tempat kelahiran dan tanah kelahiran Mukti Muhtadi.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Card 1: Pesona Alam & Wisata -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                            <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-mountain"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900">Wisata & Alam</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Karanganyar terkenal dengan destinasi wisata alam megah seperti Perkebunan Teh Kemuning, Air Terjun Grojogan Sewu, Candi Cetho, Candi Sukuh, dan pesona kawasan Lereng Gunung Lawu.
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Budaya & Kearifan Lokal -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                            <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-masks-theater"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900">Budaya & Tradisi</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Memiliki kekayaan kebudayaan Jawa yang kental, festival seni daerah, kuliner khas seperti Kelinci Karanganyar dan Timus, serta keramahan masyarakat yang senantiasa dijunjung tinggi.
+                            </p>
+                        </div>
+
+                        <!-- Card 3: Siksorogo Lawu Ultra Highlight -->
+                        <div class="bg-gradient-to-br from-slate-900 to-primary text-white p-6 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between relative overflow-hidden">
+                            <div class="space-y-3 z-10">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] uppercase font-bold tracking-widest bg-white/20 px-2.5 py-1 rounded-full text-white">Event Terbesar</span>
+                                    <i class="fa-solid fa-person-running text-2xl text-amber-400"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-white">Siksorogo Lawu Ultra</h3>
+                                <p class="text-xs text-slate-200 leading-relaxed">
+                                    Ajang event Trail Run terbesar se-Indonesia yang melintasi keindahan ekstrem lereng Gunung Lawu, Karanganyar. Menarik ribuan pelari nasional maupun internasional setiap tahunnya.
+                                </p>
+                            </div>
+                            <!-- Logo Siksorogo Placeholder -->
+                            <div class="pt-3 border-t border-white/20 flex items-center justify-between z-10">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-bold text-amber-300 text-xs">
+                                        SLU
+                                    </div>
+                                    <span class="text-xs font-semibold tracking-wide">Siksorogo Lawu Ultra</span>
+                                </div>
+                                <span class="text-[10px] text-amber-300 font-mono">Karanganyar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: HUBUNGI SAYA -->
+            <section id="hubungi-saya" class="py-20 bg-white px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center space-y-8">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-extrabold text-slate-900">Hubungi Saya</h2>
+                        <p class="text-slate-600 text-sm">Mari terhubung untuk kolaborasi, diskusi profesional, maupun informasi seputar PPL PPG.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <!-- Email -->
+                        <a href="mailto:muktimuhtadi@icloud.com" class="p-6 bg-slate-50 hover:bg-primaryLight rounded-2xl border border-slate-200 hover:border-primary/40 transition-all flex flex-col items-center space-y-3 group">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="text-xs font-semibold text-slate-400 uppercase">Surat Elektronik</div>
+                            <div class="text-sm font-bold text-slate-800 break-all">muktimuhtadi@icloud.com</div>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/6289669009192" target="_blank" class="p-6 bg-slate-50 hover:bg-emerald-50 rounded-2xl border border-slate-200 hover:border-emerald-300 transition-all flex flex-col items-center space-y-3 group">
+                            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div class="text-xs font-semibold text-slate-400 uppercase">WhatsApp</div>
+                            <div class="text-sm font-bold text-slate-800">+62 896-6900-9192</div>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/muhtadi6890" target="_blank" class="p-6 bg-slate-50 hover:bg-pink-50 rounded-2xl border border-slate-200 hover:border-pink-300 transition-all flex flex-col items-center space-y-3 group">
+                            <div class="w-12 h-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <div class="text-xs font-semibold text-slate-400 uppercase">Instagram</div>
+                            <div class="text-sm font-bold text-slate-800">@muhtadi6890</div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <!-- ================================================================= -->
+        <!-- TEMPLATE GENERATOR UNTUK PRAKTIK TERBIMBING, UTS, UAS -->
+        <!-- ================================================================= -->
+        
+        <!-- TAB 2: PRAKTIK TERBIMBING -->
+        <div id="tab-praktik-terbimbing" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+                <div class="border-b border-slate-200 pb-6">
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider">Berkas Pembelajaran</span>
+                    <h1 class="text-3xl font-bold text-slate-900 mt-1">Praktik Terbimbing</h1>
+                    <p class="text-slate-600 text-sm mt-1">Dokumentasi Modul Ajar, Bahan Ajar, Media Pembelajaran, Video Pembelajaran, dan Instrumen Penilaian Guru Pamong.</p>
+                </div>
+
+                <!-- SECTION MODUL AJAR -->
+                <section id="pt-modul" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Modul Ajar</h2>
+                            <p class="text-xs text-slate-500">Perancangan skenario & strategi pembelajaran di kelas.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- PDF Embed -->
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1zVRYPp82lFytnQPz9YYb8zTy8qXJaUcU/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <!-- Analisis -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Modul Ajar</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed space-y-2">
+                                    <span>Modul ajar ini dirancang dengan pendekatan Teaching at the Right Level (TaRL) dan Culturally Responsive Teaching (CRT) guna menyesuaikan keberagaman karakteristik peserta didik di SMKN 1 Kalibagor.</span><br/><br/>
+                                    <span>Komponen mencakup Capaian Pembelajaran (CP), Tujuan Pembelajaran (TP), Pertanyaan Pemantik, Langkah Pembelajaran Berbasis Problem-Based Learning (PBL), serta Asesmen Diagnostik, Formatif, dan Sumatif yang terukur.</span>
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Terverifikasi oleh Guru Pamong & Dosen Pembimbing Lapangan PPG UMP.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION BAHAN AJAR -->
+                <section id="pt-bahan" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Bahan Ajar</h2>
+                            <p class="text-xs text-slate-500">Materi instruksional pendukung proses pembelajaran.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- PDF Embed -->
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1LafqqOh3qKQqgV1Z3dQrLFqpDto7Mqu3/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <!-- Analisis -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Bahan Ajar</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Bahan ajar disajikan secara kontekstual dan sistematis, memuat rangkuman materi ringkas, ilustrasi visual interaktif, serta contoh studi kasus nyata di dunia kerja vokasi. Membantu siswa memahami konsep teoretis menjadi aplikasi praktis.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Disusun berdasarkan Kurikulum Merdeka Vokasi SMKN 1 Kalibagor.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION MEDIA PEMBELAJARAN -->
+                <section id="pt-media" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Media Pembelajaran</h2>
+                            <p class="text-xs text-slate-500">Alat bantu visual interaktif dalam menyampaikan materi.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- PDF Embed -->
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1-8m-TCa1h5wWKJNHUPvki3nNZ4MfrCR9/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <!-- Analisis -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Media Pembelajaran</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Penggunaan media berbasis multimedia digital meningkatkan partisipasi aktif siswa di kelas hingga 85%. Tampilan grafis modern memudahkan pemahaman alur kerja serta meningkatkan keterlibatan interaktif selama kegiatan belajar.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Berbasis Teknologi Informasi Terintegrasi.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION VIDEO PEMBELAJARAN -->
+                <section id="pt-video" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Video Pembelajaran Praktik Terbimbing</h2>
+                            <p class="text-xs text-slate-500">Dokumentasi rekaman video pelaksanaan pengajaran di kelas.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="w-full h-[450px] bg-black rounded-xl overflow-hidden shadow-md">
+                            <iframe src="https://drive.google.com/file/d/1nWDCjI2nUj5uYMcNh0lCW0lbe6ZESvte/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis & Caption Video Pembelajaran</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Video mendokumentasikan sintaks pelaksanaan Problem-Based Learning secara lengkap, mulai dari orientasi masalah, pengorganisasian belajar, pembimbingan penyelidikan kelompok, hingga presentasi dan evaluasi reflektif bersama guru pamong.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION INSTRUMEN PENILAIAN GURU PAMONG -->
+                <section id="pt-penilaian" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Instrumen Penilaian Guru Pamong</h2>
+                            <p class="text-xs text-slate-500">Lembar evaluasi kinerjaku selama praktik mengajar.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- PDF Embed -->
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1u3B1mYIenjZ3aPxhJHxEWtJeaB_QhTrB/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <!-- Analisis -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Penilaian Guru Pamong</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Hasil penilaian menunjukkan pencapaian kriteria amat baik dalam hal kompetensi pedagogik, kepribadian, sosial, serta penguasaan materi di kelas SMKN 1 Kalibagor. Masukan konstruktif guru pamong diserap untuk perbaikan berkelanjutan.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Disetujui oleh Guru Pamong SMKN 1 Kalibagor.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- TAB 3: UTS -->
+        <div id="tab-uts" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+                <div class="border-b border-slate-200 pb-6">
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider">Evaluasi Tengah Semester</span>
+                    <h1 class="text-3xl font-bold text-slate-900 mt-1">Ujian Tengah Semester (UTS)</h1>
+                    <p class="text-slate-600 text-sm mt-1">Dokumentasi Modul Ajar, Bahan Ajar, Media Pembelajaran, Video Pembelajaran, dan Instrumen Penilaian UTS.</p>
+                </div>
+
+                <!-- SECTION MODUL AJAR UTS -->
+                <section id="uts-modul" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Modul Ajar UTS</h2>
+                            <p class="text-xs text-slate-500">Perancangan perangkat pembelajaran Ujian Tengah Semester.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1zVRYPp82lFytnQPz9YYb8zTy8qXJaUcU/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Modul Ajar UTS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Modul ajar pada tahapan UTS ini memuat integrasi asesmen diagnostik lanjutan dan skenario pembelajaran yang berfokus pada penyelesaian proyek mandiri peserta didik di SMK.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Berkas Resmi Evaluasi UTS PPL PPG.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION BAHAN AJAR UTS -->
+                <section id="uts-bahan" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Bahan Ajar UTS</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1LafqqOh3qKQqgV1Z3dQrLFqpDto7Mqu3/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Bahan Ajar UTS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Materi pengayaan UTS dipersiapkan untuk memperdalam pemahaman teknis siswa dalam menghadapi evaluasi kompetensi pertengahan semester.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Teruji pada Evaluasi UTS.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION MEDIA PEMBELAJARAN UTS -->
+                <section id="uts-media" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Media Pembelajaran UTS</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1-8m-TCa1h5wWKJNHUPvki3nNZ4MfrCR9/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Media Pembelajaran UTS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Media pendukung UTS disajikan secara digital interaktif untuk memberikan pengalaman uji pemahaman yang modern dan efektif bagi para siswa.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Media Digital Terintegrasi UTS.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION VIDEO UTS -->
+                <section id="uts-video" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Video Pembelajaran UTS</h2></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="w-full h-[450px] bg-black rounded-xl overflow-hidden shadow-md">
+                            <iframe src="https://drive.google.com/file/d/1nWDCjI2nUj5uYMcNh0lCW0lbe6ZESvte/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis & Caption Video UTS</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Rekaman ujian tengah semester menampilkan performa dalam memandu kegiatan evaluasi, ketertiban ruang kelas, serta pendampingan tanya jawab siswa secara profesional.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION PENILAIAN UTS -->
+                <section id="uts-penilaian" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Instrumen Penilaian Guru Pamong (UTS)</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1u3B1mYIenjZ3aPxhJHxEWtJeaB_QhTrB/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Penilaian UTS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Evaluasi pertengahan program oleh Guru Pamong memberikan apresiasi tinggi terhadap manajemen kelas dan penguasaan bahan ajar yang terstruktur.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Lembar Evaluasi Resmi Guru Pamong.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- TAB 4: UAS -->
+        <div id="tab-uas" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+                <div class="border-b border-slate-200 pb-6">
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wider">Evaluasi Akhir Semester</span>
+                    <h1 class="text-3xl font-bold text-slate-900 mt-1">Ujian Akhir Semester (UAS)</h1>
+                    <p class="text-slate-600 text-sm mt-1">Dokumentasi Modul Ajar, Bahan Ajar, Media Pembelajaran, Video Pembelajaran, dan Instrumen Penilaian Akhir UAS.</p>
+                </div>
+
+                <!-- SECTION MODUL AJAR UAS -->
+                <section id="uas-modul" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Modul Ajar UAS</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1zVRYPp82lFytnQPz9YYb8zTy8qXJaUcU/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Modul Ajar UAS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Modul ajar UAS dirancang komprehensif sebagai puncak rangkaian praktik pembelajaran mandiri dengan penilaian berbasis performa karya siswa.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Berkas Evaluasi Akhir PPL PPG UMP.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION BAHAN AJAR UAS -->
+                <section id="uas-bahan" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Bahan Ajar UAS</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1LafqqOh3qKQqgV1Z3dQrLFqpDto7Mqu3/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Bahan Ajar UAS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Bahan ajar pengayaan UAS yang lengkap dan terstruktur untuk menuntaskan capaian pembelajaran semester.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Terverifikasi Praktik UAS.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION MEDIA PEMBELAJARAN UAS -->
+                <section id="uas-media" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Media Pembelajaran UAS</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1-8m-TCa1h5wWKJNHUPvki3nNZ4MfrCR9/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Media Pembelajaran UAS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Penggunaan media digital pembelajaran pada tahap UAS terbukti memaksimalkan pemahaman komprehensif peserta didik.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Berbasis Interaktif Digital.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION VIDEO UAS -->
+                <section id="uas-video" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Video Pembelajaran UAS</h2></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="w-full h-[450px] bg-black rounded-xl overflow-hidden shadow-md">
+                            <iframe src="https://drive.google.com/file/d/1nWDCjI2nUj5uYMcNh0lCW0lbe6ZESvte/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis & Caption Video UAS</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Video puncaknya memperlihatkan ketuntasan performa mengajar guru secara independen, responsif, dan adaptif terhadap seluruh karakteristik siswa di SMKN 1 Kalibagor.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION PENILAIAN UAS -->
+                <section id="uas-penilaian" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+                    <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primaryLight text-primary flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                        <div><h2 class="text-xl font-bold text-slate-900">Instrumen Penilaian Guru Pamong (UAS)</h2></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="w-full h-96 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden relative">
+                            <iframe src="https://drive.google.com/file/d/1u3B1mYIenjZ3aPxhJHxEWtJeaB_QhTrB/preview" class="w-full h-full border-0" allow="autoplay"></iframe>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 text-primary">Analisis Penilaian UAS</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    Hasil penilaian akumulatif akhir menunjukkan kualifikasi Amat Baik (Sangat Memuaskan) untuk seluruh indikator capaian PPL PPG Gelombang 1 2026.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-200 text-[11px] text-slate-400">
+                                Lembar Akhir Evaluasi Pamong UMP.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 5: NON-MENGAJAR (INSTAGRAM FEED STYLE GALLERY) -->
+        <!-- ================================================================= -->
+        <div id="tab-non-mengajar" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+                <div class="border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-semibold text-primary uppercase tracking-wider">Galeri Kegiatan Versatilitas</span>
+                        <h1 class="text-3xl font-bold text-slate-900 mt-1">Kegiatan Non-Mengajar</h1>
+                        <p class="text-slate-600 text-sm mt-1">Dokumentasi keterlibatan aktif dalam kehidupan persekolahan di SMKN 1 Kalibagor.</p>
+                    </div>
+                    <!-- Instagram-like badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 via-pink-500 to-amber-500 text-white rounded-full text-xs font-semibold shadow-md">
+                        <i class="fa-brands fa-instagram text-base"></i> Feed Portfolio
+                    </div>
+                </div>
+
+                <!-- INSTAGRAM CARD GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Item 1: 5S.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="5S.png" 
+                                     alt="5S" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=5S.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    kegiatan senyum-salam-sapa-sopan-santun di depan gerbang SMKN 1 Kalibagor bersama Bhabinkamtibmas Polsek Kalibagor dan Kepala Sekolah SMKN 1 Kalibagor
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">5S.png</div>
+                    </div>
+
+                    <!-- Item 2: pembina.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="pembina.png" 
+                                     alt="Pembina Upacara" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=pembina.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    menjadi pembina upacara bendera hari senin, 3 Agustus 2026. Ini adalah pengalaman pertama dalam hidup saya.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">pembina.png</div>
+                    </div>
+
+                    <!-- Item 3: piketmbg.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="piketmbg.png" 
+                                     alt="Piket MBG" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=piketmbg.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    piket membagikan makan bergizi gratis sekaligus piket kegiatan belajar mengajar.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">piketmbg.png</div>
+                    </div>
+
+                    <!-- Item 4: asrama.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="asrama.png" 
+                                     alt="Asrama Semi Boarding" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=asrama.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    berbagi kebahagiaan bersama dengan siswa siswi semi boarding SMKN 1 Kalibagor. Sabtu, 19 September 2026.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">asrama.png</div>
+                    </div>
+
+                    <!-- Item 5: briefing.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="briefing.png" 
+                                     alt="Briefing Pagi" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=briefing.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    memimpin doa saat briefing pagi bersama Kepala Sekolah SMKN 1 Kalibagor.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">briefing.png</div>
+                    </div>
+
+                    <!-- Item 6: ekskul.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="ekskul.png" 
+                                     alt="Ekskul Komputer" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=ekskul.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    menjadi pembina ekstrakurikuler komputer yang dilaksanakan di laboratorium komputer.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">ekskul.png</div>
+                    </div>
+
+                    <!-- Item 7: piketperpus.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="piketperpus.png" 
+                                     alt="Piket Perpustakaan" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=piketperpus.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    piket pelayanan perpustakaan dalam peminjaman buku.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">piketperpus.png</div>
+                    </div>
+
+                    <!-- Item 8: porgukar.png -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
+                        <div>
+                            <div class="p-3 border-b border-slate-100 flex items-center space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">MM</div>
+                                <span class="text-xs font-bold text-slate-800">muktimuhtadi</span>
+                            </div>
+                            <div class="relative overflow-hidden aspect-square bg-slate-100">
+                                <img src="porgukar.png" 
+                                     alt="PORGUKAR" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x600/005B9E/ffffff?text=porgukar.png';">
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-center space-x-3 text-slate-700 text-sm">
+                                    <i class="fa-solid fa-heart text-red-500"></i>
+                                    <i class="fa-solid fa-comment"></i>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    <span class="font-bold text-slate-900 mr-1">muktimuhtadi</span>
+                                    menjadi tim dokumentasi SMKN 1 Kalibagor dalam ajang pekan olahraga guru dan karyawan hari Selasa, 15 September 2026.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-3 text-[10px] text-slate-400 font-mono">porgukar.png</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-sm">
+                    eP
+                </div>
+                <span class="font-bold text-sm tracking-tight text-white">e-Portofolio PPG Prajabatan 2026</span>
+            </div>
+            <div class="text-xs text-slate-400 text-center sm:text-right">
+                <p>&copy; 2026 Mukti Muhtadi (NIM: 2501640500). All rights reserved.</p>
+                <p class="text-slate-500 mt-1">PPG Gelombang 1 2026 • Universitas Muhammadiyah Purwokerto • SMKN 1 Kalibagor</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Tab switching SPA logic
+        function switchTab(tabId) {
+            // Hide all tab content sections
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            // Show current tab
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update navbar active states
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('text-primary', 'bg-primaryLight/80', 'font-bold');
+                btn.classList.add('text-slate-700');
+            });
+
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('text-primary', 'bg-primaryLight/80', 'font-bold');
+                activeBtn.classList.remove('text-slate-700');
+            }
+
+            // Scroll to top smooth
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Initialize default tab on load
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('beranda');
+        });
+    </script>
+</body>
+</html>
